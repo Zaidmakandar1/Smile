@@ -1,117 +1,186 @@
-# Smile Detection Web Application
+# 😊 Smile Capture
 
-This project is a web-based smile detection application built using Python's Flask framework and OpenCV. It uses your webcam to detect a smile in real-time, and once a smile is detected, it automatically takes a picture and displays it on the screen.
+A web application that captures your photo when you **smile**, built using Flask and OpenCV with real-time face and smile detection.
 
-## Features
+---
 
-- **Real-Time Smile Detection**: Uses the webcam to detect smiles in real time.
-- **Automatic Photo Capture**: Once a smile is detected, a photo is automatically taken and displayed on the screen.
-- **Web Interface**: The entire process takes place through the browser without the need for additional software.
+## 📸 Overview
 
-## Installation
+**Smile Capture** is a browser-based application that:
+- Starts a webcam feed in real-time.
+- Detects faces and smiles using Haar Cascades.
+- Automatically captures a photo when a strong, genuine smile is detected.
+- Stores and displays the captured images.
+- Generates a unique 6-digit code for each capture session.
 
-1. Clone the Repository:
+---
 
+## 🔧 Features
+
+- Real-time face and smile detection using OpenCV.
+- Smooth fade-in/out animations using CSS.
+- Auto-snap photos when a smile is consistently detected.
+- Displays captured images with fade-in effects.
+- Lightweight and responsive UI.
+- Unique code assigned per session for image folder.
+
+---
+
+## 🧠 Tech Stack
+
+- **Frontend**: HTML, CSS (with animation), JavaScript
+- **Backend**: Python, Flask
+- **Computer Vision**: OpenCV (with Haar cascades for face and smile detection)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Shahid6174/Smile.git
+cd Smile
+```
+
+### 2. Install Dependencies
+
+Make sure you have Python ≥ 3.8 installed.
+
+It is recommended to use a virtual environment to avoid dependency conflicts:
+
+```bash
+# Create virtual environment (on macOS/Linux)
+python3 -m venv venv
+
+# or on Windows
+python -m venv venv
+
+# Activate the environment
+# macOS/Linux:
+source venv/bin/activate
+
+# Windows:
+venv\Scripts\activate
+
+# Then install dependencies
+pip install -r requirements.txt
+```
+
+To deactivate the environment when done:
+```bash
+deactivate
+```
+
+### 3. Download Haar Cascade Files (If not already present)
+
+Place the following XML files inside a folder named `dataset/`:
+- [`haarcascade_frontalface_default.xml`](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml)
+- [`haarcascade_smile.xml`](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_smile.xml)
+
+### 4. Run the Application
+
+```bash
+python app.py
+```
+
+Then open your browser and visit:  
+👉 **http://127.0.0.1:5000**
+
+---
+
+## 📁 Project Structure
+
+```
+smile-capture/
+├── dataset/
+│   ├── haarcascade_frontalface_default.xml
+│   └── haarcascade_smile.xml
+├── static/
+│   └── images/
+├── templates/
+│   └── index.html
+├── app.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 📸 Example
+
+- The app captures **3 smiling photos** per session.
+- Click **"Show Captured Images"** to view them below the video feed.
+- Click **"Done"** to refresh and start a new session with a new code.
+
+---
+
+## ✅ Dependencies
+
+- Flask
+- OpenCV (opencv-python)
+- NumPy
+
+All dependencies are listed in `requirements.txt`.
+
+---
+
+## 🙌 Acknowledgements
+
+- OpenCV team for powerful real-time computer vision.
+- Flask for simple and elegant web development.
+
+---
+
+## 📃 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Whether you're fixing bugs, improving the UI, adding features, or enhancing performance—your help is appreciated.
+
+### How to Contribute
+
+1. **Fork the repository**  
+   Click the `Fork` button at the top right of the GitHub page to create your own copy.
+
+2. **Clone your fork**  
    ```bash
    git clone https://github.com/Shahid6174/Smile.git
    cd Smile
    ```
 
-2. Create a Virtual Environment (Optional but recommended):
-
+3. **Create a new branch**  
+   Use a descriptive branch name:
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   git checkout -b your-feature-name
    ```
 
-3. Install Dependencies:
+4. **Make your changes**  
+   Improve the project by editing files, fixing bugs, or adding new functionality.
 
+5. **Commit your changes**  
    ```bash
-   pip install -r requirements.txt
+   git add .
+   git commit -m "Add: brief description of your change"
    ```
 
-## Usage
-
-1. Run the Application:
-
+6. **Push to your forked repository**  
    ```bash
-   python app.py
+   git push origin your-feature-name
    ```
 
-2. Access the Web Interface:
+7. **Open a Pull Request**  
+   Go to the original repo on GitHub and click **"New Pull Request"**.  
+   Describe your changes clearly and link any related issues if applicable.
 
-   Open your browser and go to:  
-   http://127.0.0.1:5000/
+### Code Guidelines
 
-3. Smile for the Webcam:
+- Follow the existing formatting and naming conventions.
+- Write clear and concise commit messages.
+- Test your changes before submitting a pull request.
 
-   The webcam will start, and once a smile is detected, a photo will be automatically taken and displayed on the screen.
-
-## Project Structure
-
-Smile/  
-├── app.py  
-├── requirements.txt  
-├── templates/  
-│ └── index.html  
-├── static/  
-│ ├── uploads/  
-│ └── images/  
-│  
-└── dataset/  
- └── haarcascade_smile.xml
-
-- **app.py**: Main Flask application.
-- **requirements.txt**: Python dependencies.
-- **templates/index.html**: HTML template.
-- **static/images/**: Stores clicked images.
-- **dataset/haarcascade_smile.xml**: Haar cascade for smile detection.
-
-## Dependencies
-
-- Flask
-- OpenCV (cv2)
-- Werkzeug
-
-_All dependencies are listed in the requirements.txt file._
-
-## License
-
-This project is licensed under the MIT License.
-
-## Acknowledgements
-
-- OpenCV for the smile detection classifier
-- Flask for the web framework
-
-## Contributing
-
-We welcome contributions to this project! To get started:
-
-1. **Fork the repository**: Click the "Fork" button at the top-right of this page.
-2. **Clone the repository**:  
-   After forking, clone the repository to your local machine using:
-   ```bash
-   git clone https://github.com/your-username/Smile.git
-   ```
-3. **Create a new branch**:  
-   Always create a new branch for your feature or fix:
-   ```bash
-   git checkout -b your-branch-name
-   ```
-4. **Make your changes**:  
-   Modify the code, and make sure to test your changes.
-5. **Commit your changes**:  
-   Commit your changes with a clear message:
-   ```bash
-   git commit -m "Describe your changes"
-   ```
-6. **Push to your fork**:  
-   Push the changes to your forked repository:
-   ```bash
-   git push origin your-branch-name
-   ```
-7. **Open a pull request**:  
-   Go to the original repository and click on "New Pull Request."
-
-Please make sure your code adheres to the existing style and is well-tested.
+---
