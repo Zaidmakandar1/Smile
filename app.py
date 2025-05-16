@@ -62,9 +62,11 @@ def detect_smile():
         frame = jpeg.tobytes()
         yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+
 @app.route('/video_feed')
 def video_feed():
     return Response(detect_smile(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 @app.route('/get_images')
 def get_images():
