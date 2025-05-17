@@ -7,6 +7,7 @@ A web application that captures your photo when you **smile**, built using Flask
 ## 📸 Overview
 
 **Smile Capture** is a browser-based application that:
+
 - Starts a webcam feed in real-time.
 - Detects faces and smiles using Haar Cascades.
 - Automatically captures a photo when a strong, genuine smile is detected.
@@ -68,6 +69,7 @@ pip install -r requirements.txt
 ```
 
 To deactivate the environment when done:
+
 ```bash
 deactivate
 ```
@@ -75,6 +77,7 @@ deactivate
 ### 3. Download Haar Cascade Files (If not already present)
 
 Place the following XML files inside a folder named `dataset/`:
+
 - [`haarcascade_frontalface_default.xml`](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml)
 - [`haarcascade_smile.xml`](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_smile.xml)
 
@@ -147,7 +150,8 @@ Contributions are welcome! Whether you're fixing bugs, improving the UI, adding 
 1. **Fork the repository**  
    Click the `Fork` button at the top right of the GitHub page to create your own copy.
 
-2. **Clone your fork**  
+2. **Clone your fork**
+
    ```bash
    git clone https://github.com/Shahid6174/Smile.git
    cd Smile
@@ -155,6 +159,7 @@ Contributions are welcome! Whether you're fixing bugs, improving the UI, adding 
 
 3. **Create a new branch**  
    Use a descriptive branch name:
+
    ```bash
    git checkout -b your-feature-name
    ```
@@ -162,13 +167,15 @@ Contributions are welcome! Whether you're fixing bugs, improving the UI, adding 
 4. **Make your changes**  
    Improve the project by editing files, fixing bugs, or adding new functionality.
 
-5. **Commit your changes**  
+5. **Commit your changes**
+
    ```bash
    git add .
    git commit -m "Add: brief description of your change"
    ```
 
-6. **Push to your forked repository**  
+6. **Push to your forked repository**
+
    ```bash
    git push origin your-feature-name
    ```
