@@ -33,7 +33,7 @@ def index():
 @app.route('/process_frame', methods=['POST'])
 def process_frame():
     global images_captured, current_smile_streak, folder_path
-    
+
     # Return if we've captured enough images
     if images_captured >= total_images:
         return jsonify({
@@ -42,13 +42,13 @@ def process_frame():
             'alert': False,
             'message': 'Session complete! All images captured.'
         })
-    
+
     data = request.get_json()
     img_data = data['image'].split(',')[1]
     img_bytes = base64.b64decode(img_data)
     npimg = np.frombuffer(img_bytes, np.uint8)
     img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
-    
+
     if img is None:
         return jsonify({
             'images_captured': images_captured,
@@ -59,6 +59,7 @@ def process_frame():
 
     grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(grayImg, scaleFactor=1.1, minNeighbors=6)
+
     smile_detected = False
     alert_triggered = False
     message = "Looking for faces..."
@@ -69,47 +70,45 @@ def process_frame():
     else:
         message = "Face detected, looking for smile..."
         for (x, y, w, h) in faces:
-            # Ensure ROI is within image bounds and large enough
             if w < 30 or h < 30:
                 continue
             roi_gray = grayImg[y:y+h, x:x+w]
             if roi_gray is None or roi_gray.size == 0 or len(roi_gray.shape) != 2:
-                continue  # Skip if ROI is invalid
-            
+                continue
+
             try:
                 smiles = smileCascade.detectMultiScale(
-                    roi_gray, 
-                    scaleFactor=1.8, 
+                    roi_gray,
+                    scaleFactor=1.8,
                     minNeighbors=22,
                     minSize=(25, 25)
                 )
             except Exception:
-                continue  # If detection fails, skip this face
-            
+                continue
+
             for (sx, sy, sw, sh) in smiles:
                 smile_ratio = sw / sh if sh != 0 else 0
                 smile_intensity = sw * sh
-                
-                # More lenient smile detection parameters
+
                 if smile_ratio > 1.4 and smile_intensity > 4000:
                     smile_detected = True
                     current_smile_streak += 1
                     message = f"Smile detected! ({current_smile_streak}/{consecutive_smile_frames})"
                     break
-            
+
             if smile_detected:
                 break
-        
+
         if not smile_detected:
             current_smile_streak = 0
             message = "Face detected, please smile!"
 
-    # Capture image only if we have enough consecutive smile frames
+    # Save image if enough smile frames
     if current_smile_streak >= consecutive_smile_frames:
         img_path = os.path.join(folder_path, f"image_{images_captured+1}.jpg")
         cv2.imwrite(img_path, img)
         images_captured += 1
-        current_smile_streak = 0  # Reset after capture
+        current_smile_streak = 0
         alert_triggered = True
         message = f"Perfect smile captured! ({images_captured}/{total_images})"
 
