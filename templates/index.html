@@ -3,38 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pixel Smile Snap! 😄📸</title>
+    <title>Smile Capture 😊</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
     <style>
-      /* Ensure font inheritance */
-      * {
-        font-family: inherit;
-      }
-
       body {
-        font-family: "Press Start 2P", cursive;
+        font-family: "Poppins", sans-serif;
         text-align: center;
-        background: #fff5e6;
+        background: linear-gradient(to right, #ff9a9e, #fad0c4);
         margin: 0;
         padding: 20px;
-        padding-top: 0;
-        padding-bottom: 0;
-        color: #bde0fe;
-        min-height: 100vh;
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        image-rendering: pixelated;
+        color: #333;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
       }
-
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -45,361 +29,295 @@
           transform: translateY(0);
         }
       }
-
-      @keyframes pop {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-        100% {
-          transform: scale(0.95);
-        }
-      }
-
-      @keyframes imagePop {
-        0% {
-          opacity: 0;
-          transform: scale(0.8);
-        }
-        100% {
+      @keyframes fadeOut {
+        from {
           opacity: 1;
-          transform: scale(1);
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-10px);
         }
       }
-
-      h1,
-      h2,
-      .code-highlight,
-      #feedback,
-      .loading,
-      .error {
-        font-family: inherit; /* Ensure inheritance */
-      }
-
       h1 {
-        font-size: 1.5rem;
-        color: #bde0fe;
-        text-shadow: 2px 2px #5555ff;
-        margin-bottom: 40px;
-        animation: fadeIn 1s ease-in-out;
+        color: #fff;
+        font-weight: 600;
+        margin-bottom: 20px;
       }
-
-      .menu,
-      .click-pics,
-      .show-pics {
-        background: #333333;
-        padding: 20px;
-        border: 4px solid #a2d2ff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        animation: fadeIn 0.5s ease-in-out;
-      }
-
-      button {
-        font-family: inherit; /* Inherit from body */
-        background: #ffcce6;
-        color: #333333;
-        border: 4px solid #99ccff;
-        padding: 10px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: transform 0.1s, background 0.2s, border-color 0.2s;
-        text-transform: uppercase;
-        image-rendering: pixelated;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      }
-
-      .menu-buttons button {
-        width: 120px;
-        height: 120px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-size: 0.8rem;
-        padding: 0;
-        line-height: 1.2;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .menu-buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-      }
-
-      button:hover {
-        background: #ffafcc;
-        border-color: #a2d2ff;
-        transform: scale(1.05);
-      }
-
-      button:active {
-        animation: pop 0.2s;
-        transform: scale(0.95);
-      }
-
-      div.menu .menu-buttons button {
-        /* Removed font-family to inherit from body */
-      }
-
-      .video-container {
-        border: 6px solid #99ccff;
-        border-radius: 4px;
-        overflow: hidden;
-        background: #111111;
-        position: relative;
-        max-width: 100%;
-      }
-
-      .video-container::before {
-        content: "📸";
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 2rem;
-        color: #99ccff;
-      }
-
-      .video-container img {
+      .container {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        max-width: 700px;
         width: 100%;
-        max-width: 640px;
-        height: auto;
-        display: block;
-        image-rendering: pixelated;
+        transition: transform 0.3s;
+        opacity: 0;
+        animation: fadeIn 1s forwards 0.5s;
       }
-
+      .container:hover {
+        transform: scale(1.02);
+      }
+      .video-container {
+        border: 6px solid #ff5733;
+        border-radius: 12px;
+        overflow: hidden;
+      }
       .button-container {
-        margin-top: 15px;
         display: flex;
         justify-content: center;
         gap: 10px;
+        margin-top: 15px;
       }
-
+      button {
+        background: #ff5733;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.3s, transform 0.2s;
+      }
+      button:hover {
+        background: #e74c3c;
+        transform: scale(1.05);
+      }
+      .status-message {
+        margin-top: 15px;
+        font-size: 16px;
+        color: #333;
+      }
+      .alert-message {
+        display: none;
+        margin-top: 10px;
+      }
+      .progress-container {
+        margin-top: 20px;
+        text-align: left;
+      }
+      .progress-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin-bottom: 4px;
+        color: #555;
+      }
+      .progress-bar {
+        width: 100%;
+        height: 12px;
+        background: #e0e0e0;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 12px;
+      }
+      .progress-bar-inner {
+        height: 100%;
+        width: 0;
+        background: #4caf50;
+        transition: width 0.3s;
+      }
+      .smile-bar-inner {
+        height: 100%;
+        width: 0;
+        background: #ffa500;
+        transition: width 0.3s;
+      }
       .captured-images {
         margin-top: 20px;
-        margin-bottom: 20px;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 10px;
       }
-
       .captured-images img {
-        width: 80px;
-        height: 80px;
-        border: 3px solid #a2d2ff;
-        border-radius: 4px;
-        image-rendering: pixelated;
-        transition: transform 0.2s;
-        animation: imagePop 0.3s ease-in;
+        width: 120px;
+        height: 120px;
+        margin: 8px;
+        border-radius: 10px;
+        border: 3px solid #ff5733;
+        transition: transform 0.3s, opacity 0.3s;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
       }
-
       .captured-images img:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
-
-      .loading,
-      .error {
-        font-size: 0.8rem;
-        color: #ff5555;
-        margin-top: 15px;
-        display: none;
-      }
-
-      .feedback-success {
-        color: #55ff55;
-      }
-
       h2 {
-        font-size: 1rem;
-        color: #cdb4db;
-        margin-top: 40px;
-        text-shadow: 1px 1px #9f86c0;
+        margin-top: 20px;
+        font-size: 22px;
+        color: white;
       }
-
       .code-highlight {
-        color: #71d0d0;
-        background: #333333;
-        padding: 2px 6px;
-        border-radius: 4px;
-      }
-
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 1.2rem;
-        }
-
-        .menu-buttons button {
-          width: 80px;
-          height: 80px;
-          font-size: 0.6rem;
-        }
-
-        button {
-          padding: 8px;
-          font-size: 0.8rem;
-        }
-
-        .captured-images img {
-          width: 60px;
-          height: 60px;
-        }
-
-        .video-container img {
-          max-width: 100%;
-        }
+        color: #ff5733;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
-    <div id="menu" class="menu">
-      <h1>😄 Pixel Smile Snap! 📸</h1>
-      <div class="menu-buttons">
-        <div>
-          <button onclick="showClickPics()" aria-label="Start capturing photos">
-            Click Pics!
-          </button>
-        </div>
-        <div>
-          <button onclick="showPics()" aria-label="View captured photos">
-            Show Snaps!
-          </button>
-        </div>
+    <h1>😊 Smile to Capture Your Photo! 😊</h1>
+    <div class="container">
+      <div id="status-message" class="status-message">
+        Initializing camera...
       </div>
-      <h2>Your Code: <span class="code-highlight">{{ folder_code }}</span></h2>
-    </div>
+      <div id="alert-message" class="alert-message"></div>
 
-    <div id="clickPics" class="click-pics" style="display: none">
-      <h1>📸 Say CHEEESE 🧀</h1>
       <div class="video-container">
-        <img
-          src="{{ url_for('video_feed') }}"
-          alt="Video Feed"
-          class="video-feed"
-        />
+        <video id="video" width="640" height="480" autoplay playsinline></video>
+        <canvas
+          id="canvas"
+          width="640"
+          height="480"
+          style="display: none"
+        ></canvas>
       </div>
-      <div id="feedback" style="font-size: 0.8rem; margin-top: 10px"></div>
-      <div class="button-container">
-        <button onclick="showPics()" aria-label="View captured photos">
-          Show Snaps!
-        </button>
-        <button onclick="showMenu()" aria-label="Reset and start over">
-          Done!
-        </button>
-      </div>
-      <h2>Your Code: <span class="code-highlight">{{ folder_code }}</span></h2>
-    </div>
 
-    <div id="showPics" class="show-pics" style="display: none">
-      <h1>🎮 Your Snaps!</h1>
-      <div class="loading" id="loading">Loading snaps... ✨</div>
-      <div class="error" id="error"></div>
-      <div class="captured-images" id="capturedImages"></div>
-      <div class="button-container">
-        <button onclick="smoothReload()" aria-label="Reload the page">
-          Click More!
-        </button>
-        <button onclick="showMenu()" aria-label="Return to main menu">
-          Done!
-        </button>
+      <div class="progress-container">
+        <div class="progress-labels">
+          <span>Images Captured</span><span id="progress-text">0/3</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progress-bar" class="progress-bar-inner"></div>
+        </div>
+        <div class="progress-labels">
+          <span>Smile Streak</span><span id="smile-text">0/3</span>
+        </div>
+        <div class="progress-bar">
+          <div id="smile-progress" class="smile-bar-inner"></div>
+        </div>
       </div>
-      <h2>Your Code: <span class="code-highlight">{{ folder_code }}</span></h2>
+
+      <div class="button-container">
+        <button onclick="loadCapturedImages()">Show Captured Images</button>
+        <button onclick="smoothReload()">Done</button>
+      </div>
+
+      <div class="captured-images" id="capturedImages"></div>
     </div>
+    <h2>Your Code is: <span class="code-highlight">{{ folder_code }}</span></h2>
 
     <script>
-      function showMenu() {
-        document.getElementById("menu").style.display = "block";
-        document.getElementById("clickPics").style.display = "none";
-        document.getElementById("showPics").style.display = "none";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas");
+      let capturing = true;
+      let imagesCaptured = 0;
+      const totalImages = 3;
 
-      function showClickPics() {
-        document.getElementById("menu").style.display = "none";
-        document.getElementById("clickPics").style.display = "block";
-        document.getElementById("showPics").style.display = "none";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-      function smoothReload() {
-        const feedback = document.getElementById("feedback");
-        feedback.textContent = "Resetting...";
-        setTimeout(() => {
-          location.reload();
-        }, 500); // Wait for transition
-      }
-      function showPics() {
-        document.getElementById("menu").style.display = "none";
-        document.getElementById("clickPics").style.display = "none";
-        document.getElementById("showPics").style.display = "block";
-        loadCapturedImages();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-
-      async function loadCapturedImages() {
-        const loading = document.getElementById("loading");
-        const error = document.getElementById("error");
-        const imageContainer = document.getElementById("capturedImages");
-
-        loading.style.display = "block";
-        error.style.display = "none";
-        imageContainer.innerHTML = "";
-
+      async function startCamera() {
         try {
-          const response = await fetch("/get_images");
-          if (!response.ok) throw new Error("Failed to fetch images");
-          const data = await response.json();
-          if (data.error) throw new Error(data.error);
-
-          data.images.forEach((image, index) => {
-            const imgElement = document.createElement("img");
-            imgElement.src = `/static/images/${image}`;
-            imgElement.style.animationDelay = `${index * 0.1}s`;
-            imageContainer.appendChild(imgElement);
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
           });
+          video.srcObject = stream;
+          video.onloadedmetadata = () => {
+            video.play();
+            captureLoop();
+          };
+        } catch (err) {
+          updateStatus("Camera access denied or not available.", true);
+        }
+      }
 
-          setTimeout(() => {
-            window.scrollTo({
-              top: document.body.scrollHeight,
-              behavior: "smooth",
+      function updateStatus(message, isAlert = false) {
+        const statusEl = document.getElementById("status-message");
+        const alertEl = document.getElementById("alert-message");
+        if (statusEl) statusEl.textContent = message;
+        if (isAlert && alertEl) {
+          alertEl.textContent = "📸 SMILE CAPTURED! 😊";
+          alertEl.style.display = "block";
+          setTimeout(() => (alertEl.style.display = "none"), 3000);
+        }
+      }
+
+      function updateProgressBar(current, total, smileStreak, requiredStreak) {
+        const bar = document.getElementById("progress-bar");
+        const text = document.getElementById("progress-text");
+        const smileBar = document.getElementById("smile-progress");
+        const smileText = document.getElementById("smile-text");
+
+        if (bar && text) {
+          const pct = (current / total) * 100;
+          bar.style.width = pct + "%";
+          text.textContent = `${current}/${total}`;
+        }
+        if (smileBar && smileText) {
+          const pct = (smileStreak / requiredStreak) * 100;
+          smileBar.style.width = pct + "%";
+          smileText.textContent = `${smileStreak}/${requiredStreak}`;
+        }
+      }
+
+      function captureLoop() {
+        if (!capturing || imagesCaptured >= totalImages) {
+          updateStatus("Session complete!");
+          return;
+        }
+        canvas
+          .getContext("2d")
+          .drawImage(video, 0, 0, canvas.width, canvas.height);
+        const dataURL = canvas.toDataURL("image/jpeg");
+
+        fetch("/process_frame", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ image: dataURL }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            imagesCaptured = data.images_captured;
+            updateStatus(data.message, false);
+            updateProgressBar(
+              imagesCaptured,
+              totalImages,
+              data.smile_streak || 0,
+              data.required_streak || 3
+            );
+            if (data.alert) {
+              updateStatus(data.message, true);
+              if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+            }
+            if (imagesCaptured < totalImages) {
+              setTimeout(captureLoop, 100);
+            } else {
+              updateStatus("All images captured! Check the gallery.");
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            updateStatus("Error processing frame");
+            setTimeout(captureLoop, 500);
+          });
+      }
+
+      function loadCapturedImages() {
+        fetch("/get_images")
+          .then((res) => res.json())
+          .then((data) => {
+            const container = document.getElementById("capturedImages");
+            container.innerHTML = "";
+            data.images.forEach((img) => {
+              const el = document.createElement("img");
+              el.src = "/static/images/" + img;
+              container.appendChild(el);
+              setTimeout(() => (el.style.opacity = "1"), 100);
             });
-          }, 300);
-        } catch (err) {
-          error.textContent = `Oops! ${err.message}`;
-          error.style.display = "block";
-        } finally {
-          loading.style.display = "none";
-        }
+            setTimeout(
+              () =>
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  behavior: "smooth",
+                }),
+              300
+            );
+          });
       }
 
-      async function updateFeedback() {
-        const feedback = document.getElementById("feedback");
-        try {
-          const response = await fetch("/detection_status");
-          if (!response.ok) throw new Error("Failed to fetch detection status");
-          const data = await response.json();
-          feedback.textContent = data.message || "";
-          feedback.className = data.message.includes("Smile detected!")
-            ? "feedback-success"
-            : "";
-        } catch (err) {
-          feedback.textContent = "Error fetching feedback. Please try again.";
-          feedback.className = "";
-          console.error("Failed to fetch detection status:", err);
-        }
+      function smoothReload() {
+        document.body.style.animation = "fadeOut 0.5s forwards";
+        setTimeout(() => location.reload(), 500);
       }
 
-      setInterval(() => {
-        if (document.getElementById("clickPics").style.display === "block") {
-          updateFeedback();
-        }
-      }, 2000);
+      window.onload = startCamera;
     </script>
   </body>
 </html>
