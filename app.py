@@ -157,14 +157,15 @@ def detect_smile():
             continue
         frame = jpeg.tobytes()
         yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
+        
     # Log when video feed stops
     logger.info("Video feed stopped")
-
+    
 @app.route('/video_feed')
 def video_feed():
     logger.info("Starting video feed")
     return Response(detect_smile(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 @app.route('/get_images')
 def get_images():
